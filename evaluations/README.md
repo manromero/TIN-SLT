@@ -1,0 +1,1 @@
+You may use this folder to store the posstprocessing records (generated data, generated clean text and score).

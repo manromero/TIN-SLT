@@ -1,0 +1,1 @@
+You may use this folder to store the dataset, raw and processed.
