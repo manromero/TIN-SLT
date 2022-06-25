@@ -98,11 +98,13 @@ void bleu_addngram(
 
 extern "C" {
 
-void bleu_zero_init(bleu_stat* stat) {
+// Necesario para windows __declspec(dllexport)
+__declspec(dllexport) void bleu_zero_init(bleu_stat* stat) {
   std::memset(stat, 0, sizeof(bleu_stat));
 }
 
-void bleu_one_init(bleu_stat* stat) {
+// Necesario para windows __declspec(dllexport)
+__declspec(dllexport) void bleu_one_init(bleu_stat* stat) {
   bleu_zero_init(stat);
   stat->count1 = 0;
   stat->count2 = 1;
@@ -114,7 +116,8 @@ void bleu_one_init(bleu_stat* stat) {
   stat->match4 = 1;
 }
 
-void bleu_add(
+// Necesario para windows __declspec(dllexport)
+__declspec(dllexport) void bleu_add(
     bleu_stat* stat,
     size_t reflen, int* ref, size_t predlen, int* pred, int pad, int eos) {
 

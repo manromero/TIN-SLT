@@ -20,7 +20,31 @@ If the trained model doesn't work or if there are any issues, please feel free t
 * The pre-trained model can be downloaded in [bert-base-german-dbmdz-uncased](https://drive.google.com/file/d/105RuAqXLYj5mPeHbp3pzEKCWlSL7wR0o/view?usp=sharing).
 ## 3. Execute Steps
 
-#### Step 1 install dependencies
+May differs from the original in [tin-slt](https://github.com/yongcaoplus/tin-slt):
+
+#### Step 1 prepare environment
+
+Clone the repository
+
+```
+git clone https://github.com/manromero/TIN-SLT
+cd TIN-SLT
+```
+
+Create a new virtual environment using python 3.6
+
+```
+# create a new virtual environment using python 3.6
+virtualenv --python=python3 venv
+# If you have more than one python, you can specify the python file. 
+# ex: `virtualenv --python=C:\Users\migu1\AppData\Local\Programs\Python\Python36\python.exe venv`
+# Activate linux:
+source venv/bin/activate
+# Activate windows:
+.\venv\Scripts\activate
+```
+
+#### Step 2 install dependencies
 
 ```shell script
 pip install --editable .      
@@ -32,13 +56,39 @@ Note that, if the download speed is not fast, try this:
 pip install --editable . -i https://pypi.tuna.tsinghua.edu.cn/simple   
 ```
 
-Our code is implemented over Python 3.6.8, and Pytorch 1.5.0+cu101. (We didn't test the code on other package version.)      
+Verify that torch has been installed correctly
+
+```
+python
+> import torch
+> torch.cuda.is_available()
+# True -> The installation has been successfully completed and it is possible to use the graphics card for training.
+# False -> Despite a successful installation, it will not be possible to make use of the graphics card during training, which will cause errors during training.
+```
+
+If false:
+
+1. Make sure you have configured CUDA and CUDNN correctly. An example configuration for Windows 11 is available [here](https://youtu.be/OEFKlRSd8Ic?t=123).
+2. Perform the Torch installation using the commands available from the [official PyTorch website](https://pytorch.org/get-started/locally/), removing the installed version beforehand.
+
+Originally the code is implemented over Python 3.6.8, and Pytorch 1.5.0+cu101. (It wasn't test on other package version.)      
 ```shell script
+pip uninstall torch
 pip install torch==1.5.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-#### Step 2 Prepare dataset
-If you use our prepared dataset, skip this step. 
+#### Step 3 Prepare dataset
+
+For facilitate the organization, prepare the next folder structure:
+* Create folder "dataset" in the root of the directory
+* Create folder "raw" and "processed" in the folder "dataset" created
+
+Extract the google drives dataset in the previous folders.
+
+If you use our prepared dataset, skip these steps. 
+
+Configure "preprocessing/prepare_data.py" with the dataset path you are going to use.
+
 Else:
 ```shell script
 cd preprocessing      
@@ -48,9 +98,13 @@ Then you can get the following files in your destination dir:
 ![](asset/prepare_data.png)
 
 
-#### Step 3 Train by AutoML
+#### Step 4 Train by AutoML
 Choose one training method (with / without automl).
+
+**Important:** "Train without AutoML" was the method used to train the model in the research work carried out for the Master's thesis. We leave the rest of the instructions from the original article, although these have not been tested and may require additional instructions.
 ##### (1) Without AutoML
+
+For Linux users:
 
 ```shell script
 cd trainer
@@ -58,7 +112,22 @@ cd trainer
 sh train.sh
 ```
 
+For Windows users:
+
+*This script has been created with respect to the original documentation to make it easier for Windows users to train the model.*
+
+```shell script
+cd trainer
+# please config train_windows.py first, and then:
+python train_windows.py
+```
+
+Runtime: 2 hours 52 min (Approximate, using NVIDIA GeForce RTX 3070).
+
 ##### (2) With AutoML
+
+**Note:** Not tested for the Master's Thesis.
+
 Config automl/config.yml and automl/search_space.json files, and run the following cmd to train in your terminal:
 ```shell script
 nnictl create --config automl/config.yml -p 11111
@@ -75,11 +144,23 @@ Go to your browser to see the training process.
 Please refer to [NNI Website](https://nni.readthedocs.io/) for more instructions on NNI.
 
 
-#### Step 4 Obtain Mertrix
+#### Step 5 Evaluate
+
+For Linux users:
 
 ```shell script
 cd postprocessing       
 sh get_bleu4.sh
+```
+
+For Windows users:
+
+*This script has been created with respect to the original documentation to make it easier for Windows users to evaluate the model.*
+
+```shell script
+cd postprocessing
+# please config get_bleu4_stmc_windows.py first, and then:
+python get_bleu4_stmc_windows.py
 ```
 
 ## 4. Questions
@@ -88,6 +169,10 @@ Please contact [yongcao_epic@hust.edu.cn]().
 
 
 ## 5. Some problems you may encounter:
+
+1.During dependencies installation: "Cannot open include file: 'basetsd.h': No such file or directory"
+
+Install [winsdksetup](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)
 
 1.'ascii' codec can't decode byte 0xef
 ```shell script

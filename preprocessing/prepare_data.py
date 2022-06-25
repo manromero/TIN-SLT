@@ -7,9 +7,12 @@ import shutil
 ################# Configuration  ####################
 source_language = "gloss"
 target_language = "de"
-source_path = "./../dataset/raw/ph14_stmc"
-destdir = "./../dataset/processed/ph14_stmc"
-bert_model_path = "/haotianshuv/caoyong/pretrained_model/bert-base-german-dbmdz-uncased/"
+source_path = "./../dataset/raw/stmc_ph14/ph14_stmc"
+destdir = "./../dataset/processed/stmc_ph14/ph14_stmc"
+# Original
+# bert_model_path = "/haotianshuv/caoyong/pretrained_model/bert-base-german-dbmdz-uncased/"
+# Updated in fork
+bert_model_path = "dbmdz/bert-base-german-uncased"
 ################# End Configuration  ################
 
 index = ["python preprocess.py", "--source-lang", source_language, "--target-lang", target_language, "--trainpref",
