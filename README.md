@@ -163,12 +163,27 @@ cd postprocessing
 python get_bleu4_stmc_windows.py
 ```
 
-## 4. Questions
+## 4. Unified flow and hyperparameter scanning
+
+To facilitate the execution of the flow in a unified way, while enabling hyperparameter scanning, the python file "scan.py" has been created (Not available in the original repository). In it we can configure as a grid the combinations of hyperparameters that we want to test. Once configured, the complete training, inference and evaluation flow will be executed for each of the combinations set.
+
+```
+python scan.py
+```
+
+Once we have found the model with the best metrics, we can refine the selection of the hyperparameter "beam size" using the "beam_search.py" script.
+
+```
+python beam_search.py
+```
+
+
+## 5. Questions
 Please contact [yongcao_epic@hust.edu.cn]().
 
 
 
-## 5. Some problems you may encounter:
+## 6. Some problems you may encounter:
 
 1.During dependencies installation: "Cannot open include file: 'basetsd.h': No such file or directory"
 
