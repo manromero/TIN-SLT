@@ -18,7 +18,7 @@ Originally created by [Yong Cao](https://yongcaoplus.github.io/), Wei Li, [Xianz
 * The original trained model can be downloaded in [Google Drive](https://drive.google.com/drive/folders/1s26goE0Rh4T9L_d-6XDfHKYP_FPGPveR?usp=sharing). 
 If the trained model doesn't work or if there are any issues, please feel free to contact us.
 * The original pre-trained model can be downloaded in [bert-base-german-dbmdz-uncased](https://drive.google.com/file/d/105RuAqXLYj5mPeHbp3pzEKCWlSL7wR0o/view?usp=sharing).
-* Best model found after performing hyperparameter scanning: [our best TIN-SLT](https://uses0-my.sharepoint.com/:u:/g/personal/mignunolm_alum_us_es/EaraWClmZkNFr29i3YfcDX8By3JW98IYSDSdFCL6kU_6wg?e=Xf8xBe)
+* Our best model found (different from the original) after performing hyperparameter scanning: [our best TIN-SLT](https://uses0-my.sharepoint.com/:u:/g/personal/mignunolm_alum_us_es/EaraWClmZkNFr29i3YfcDX8By3JW98IYSDSdFCL6kU_6wg?e=Xf8xBe).
 ## 3. Execute Steps
 
 May differs from the original in [tin-slt](https://github.com/yongcaoplus/tin-slt):
